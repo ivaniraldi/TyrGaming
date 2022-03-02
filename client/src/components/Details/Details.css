@@ -1,0 +1,90 @@
+.image {
+  width: 450px;
+  height: auto;
+  border: solid #808080 3px;
+  border-radius: 2%;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.h3_details {
+  margin-top: 10%;
+  font-size: 30px;
+  color: rgb(211, 211, 211);
+  text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 5px rgb(0, 0, 0), 0 0 5px rgb(0, 0, 0),
+    0 0 5px rgb(0, 0, 0);
+  text-align: center;
+}
+.recaja {
+  justify-content: center;
+  text-align: center;
+
+  display: grid;
+}
+/* .caja{
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+} */
+.p {
+  height: 10px;
+  font-family: sans-serif;
+  color: #d0d0d0;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  background: #0000006b;
+  margin: 0 0 25px;
+  margin-top: 6px;
+  padding: 20px;
+  border-radius: 6px;
+  border: 2px solid #767676;
+
+  justify-content: center;
+  align-content: center;
+}
+.conteinDesc {
+  height: 200px;
+  font-family: sans-serif;
+  color: #c5c5c5;
+  font-size: 16px;
+  font-weight: 450;
+  text-align: center;
+  background: #00000070;
+  margin: 0 0 25px;
+  overflow: auto;
+  padding: 20px;
+  border-radius: 6px;
+  border: 2px solid #7b7b7b;
+
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.conteinDesc::-webkit-scrollbar {
+  display: none;
+}
+
+.buttonBack {
+  position: relative;
+  top: 25px;
+  padding: 20px 50px;
+  background: linear-gradient(#333, #222);
+  color: #c5c5c5;
+  border: 2px solid rgb(179, 179, 179);
+  font-weight: bolder;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.buttonBack:hover {
+  color: aliceblue;
+  background-color: black;
+  border-color: aliceblue;
+  border-radius: 3px;
+}
+.cajita {
+  width: 600px;
+  justify-content: center;
+}
