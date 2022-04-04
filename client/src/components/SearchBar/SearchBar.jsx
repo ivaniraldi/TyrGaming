@@ -1,36 +1,16 @@
 import React from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getByName } from "../../action";
-import Styles from "./SearchBar.module.css";
 
 export default function SearchBar() {
-  const dispatch = useDispatch();
-  const [name, setName] = useState("");
 
-  function handleInput(e) {
-    e.preventDefault();
-    setName(e.target.value);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(getByName(name));
-    setName("");
-  }
 
   return (
-    <div className={Styles.search}>
-      <form action="">
-        <input
-          type="text"
-          placeholder="Search Game"
-          onChange={(e) => handleInput(e)}
-        />
-        <button type="Submit" onClick={(e) => handleSubmit(e)}>
-          Search
-        </button>
-      </form>
-    </div>
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">TýrGaming</a>
+    <form class="d-flex">
+      <a href="/home"class="btn btn-outline-info" >Back to home</a>
+    </form>
+  </div>
+</nav>
   );
 }

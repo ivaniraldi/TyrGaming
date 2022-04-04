@@ -30,9 +30,9 @@ const mapGames = async (arr) => {
             id: a.id,
             name: a.name,
             img: a.background_image,
+            rating: a.rating_top, 
+            released: a.released,
             genres: a.genres.map(g => { return { id: g.id, name: g.name } }),
-            rating: a.rating_top,
-            released: a.released
         }
     })
     return aux;

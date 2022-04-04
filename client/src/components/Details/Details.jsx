@@ -1,38 +1,26 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router";
 import { resetDetails } from "../../action";
+import SearchBar from "../SearchBar/SearchBar";
 import "./Details.css";
 
 export default function Details() {
-  const dispatch = useDispatch();
-  const history = useHistory();
-
   let resp = useSelector((state) => state.detail);
-
-  function handleBack(e) {
-    e.preventDefault();
-    dispatch(resetDetails());
-    history.push("/home");
-  }
-  // console.log(props, '------------------ console log de props')
 
   return (
     <div>
+      <SearchBar></SearchBar>
       {resp && resp.platforms && resp.genres ? (
-        <div className="recaja">
-          <div>
-            <button className="buttonBack" onClick={(e) => handleBack(e)}>
-              Back
-            </button>
-          </div>
-          <div className="cajita">
-            <h2 className="h3_details">{resp.name}</h2>
+        <div className="container" style={{padding:"20px"}}>
+          <div className="card w-50"
+          >
+            <img className="card-img-top" src={resp.img} alt="Not found Img" />
+            <div className="container">
+            <h2 className="card-title">{resp.name}</h2>
 
-            <img className="image" src={resp.img} alt="Not found Img" />
 
-            <p className="p">Rating: {resp.rating}</p>
-            <p className="p">
+            <p className="card-subtitle mb-2 text-muted">Rating: {resp.rating}</p>
+            <p className="card-subtitle mb-2 text-muted">
               Genre:{" "}
               {resp.genres !== undefined
                 ? resp.genres.map((g) => g.name + " - ")
@@ -57,6 +45,7 @@ export default function Details() {
                   : "empty"}
               </p>
             )}
+            </div>
           </div>
         </div>
       ) : (

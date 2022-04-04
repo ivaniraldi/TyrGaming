@@ -9,16 +9,15 @@ import {
   sort_by_Rating,
   filterGenre,
   getGenres,
+  getByName,
 } from "../../action";
 import CardGame from "../CardGame/CardGame";
-import Loading from "../Loading/Loading";
 import SearchBar from "../SearchBar/SearchBar";
 import Paginado from "../Paginado/Paginado";
 import Styles from "./Home.module.css";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.loading);
   const allG = useSelector((state) => state.oneGames);
   const data = useSelector((state) => state.data);
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,7 +41,7 @@ export default function Home() {
   //--------------- paginado ------------------\\
 
   //  console.log(currentPage, ' ---------- current page')
-  const [xPage] = useState(15); //---------------cantidad de games x pagina
+  const [xPage] = useState(8); //---------------cantidad de games x pagina
   //  console.log(xPage, '----------------- xpage')
   const indexLast = currentPage * xPage;
   //   console.log(indexLast, '--------------index last')
@@ -83,25 +82,34 @@ export default function Home() {
     e.preventDefault();
     dispatch(sort_AZ_ZA(e.target.value));
   }
-
+  
   function handleRating(e) {
     e.preventDefault();
     dispatch(sort_by_Rating(e.target.value));
+  }
+  const [name, setName] = useState("");
+
+  function handleInput(e) {
+    e.preventDefault();
+    setName(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(getByName(name));
+    setName("");
   }
 
   // ---------------- fin del paginado ---------------------------\\
 
   return (
     <div className={Styles.responsive}>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className={Styles.background}>
-          <div className={Styles.divNav}>
-            <nav className={Styles.nav}>
+      <nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">TýrGaming</a>
               <div className={Styles.filtros}>
                 <select
-                  className={Styles.select}
+                  className="btn btn-outline-info" style={{marginLeft:"20px"}}
                   onChange={(e) => handleFilterCreate(e)}
                   name="filtercreate"
                   id="filtercreate"
@@ -111,16 +119,17 @@ export default function Home() {
                   <option value="Other">Other</option>
                 </select>
                 <select
-                  className={Styles.select}
+                  className="btn btn-outline-info" style={{marginLeft:"20px"}}
                   onChange={(e) => handleSort(e)}
                   name="sort"
                   id="sort"
                 >
+                  <option value="az">Order by name</option>
                   <option value="az">Ascendent A-Z</option>
                   <option value="za">Descendent Z-A</option>
                 </select>
                 <select
-                  className={Styles.select}
+                  className="btn btn-outline-info" style={{marginLeft:"20px"}}
                   onChange={(e) => handleRating(e)}
                   name=""
                   id=""
@@ -129,7 +138,7 @@ export default function Home() {
                   <option value="worst">Rating Down</option>
                 </select>
                 <select
-                  className={Styles.select}
+                  className="btn btn-outline-info" style={{marginLeft:"20px"}}
                   onChange={(e) => handleFilterGenre(e)}
                   name=""
                   id=""
@@ -140,34 +149,38 @@ export default function Home() {
                   ))}
                 </select>
                 <Link to="/videogames">
-                  <button className={Styles.select}>Create</button>
+                  <button className="btn btn-outline-info" style={{marginLeft:"20px"}}>Create</button>
                 </Link>
               </div>
-              <SearchBar />
-            </nav>
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={e=>handleInput(e)}/>
+      <button class="btn btn-outline-info" type="submit" onSubmit={e=>handleSubmit(e)}>Search</button>
+    </form>
+  </div>
+</nav>
+        <div className={Styles.background}>
+          <div className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div className="container">
+            </div>
           </div>
+          
 
-          <div className={Styles.separator}></div>
-          <Paginado
-            xPage={xPage}
-            result={result.length}
-            paginate={paginate}
-            previus={previus}
-            next={next}
-          />
-          <div className={Styles.grid}>
+          <div className="container">
+            <div className="row">
             {currentGame?.map((e, idx) => {
               return (
-                <div key={idx}>
-                  <Link
+                <div className="col-md-auto">
+                  <Link key={idx}
                     onClick={() => dispatch(getDetail(e.id))}
+                    style={{textDecoration:"none", color:"#ffffff"}}
                     to={`/videogame/${e.id}`}
                   >
-                    <CardGame name={e.name} img={e.img} genres={e.genres} />
+                    <CardGame name={e.name} img={e.img} rating={e.rating} genres={e.genres} />
                   </Link>
                 </div>
               );
             })}
+          </div>
           </div>
 
           <Paginado
@@ -178,7 +191,7 @@ export default function Home() {
             next={next}
           />
         </div>
-      )}
+      
     </div>
   );
 }

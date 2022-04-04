@@ -9,9 +9,9 @@ export default function Paginado({ xPage, result, paginate, next, previous }) {
   }
   //  console.log(pageNumber, '------------console log page number')
   return (
-    <nav className={styles.nav}>
-      <ul className={styles.p_ul}>
-        <button className={styles.loader} onClick={() => paginate(previous)}>
+    <nav className="navbar navbar-dark bg-dark">
+      <ul className="container-fluid">
+        <button className="btn btn-outline-light" onClick={() => paginate(previous)}>
           {" "}
           PREV{" "}
         </button>
@@ -19,7 +19,7 @@ export default function Paginado({ xPage, result, paginate, next, previous }) {
           <li className={styles.p_li} key={number}>
             <div className={styles.a_li}>
               <button
-                className={styles.p_button}
+                className="btn btn-dark"
                 onClick={() => paginate(number)}
               >
                 {number}
@@ -27,7 +27,7 @@ export default function Paginado({ xPage, result, paginate, next, previous }) {
             </div>
           </li>
         ))}
-        <button className={styles.loader} onClick={() => paginate(next)}>
+        <button className="btn btn-outline-light"onClick={() => paginate(next)}>
           {" "}
           NEXT{" "}
         </button>
